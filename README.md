@@ -44,7 +44,7 @@ IoT  개발자 임베디드시스템 학습리포지토리
     - vnc viewer 설치
     - vncserver-virtual 
     - enum 열거형
-       ``` C
+       ``` C++
         #이부분은 주석입니다 C언어
         #include <stdio.h>
             void main(){
