@@ -26,7 +26,8 @@ IoT  개발자 임베디드시스템 학습리포지토리
 - pirntf:출력
 - scanf: 받는 
 - malloc free
-
+- static: 데이터 저장
+- extern 바깥에 있는 실행파일 받아오기
 
 
 
@@ -59,3 +60,16 @@ IoT  개발자 임베디드시스템 학습리포지토리
 - malloc free
 - curr 순환
 - node 전위 삽입/ 후위 삽입
+
+
+### day05
+- 연결리스트
+
+### day06
+- stack
+- queue
+
+### day07
+- queue 추가
+- static
+- extern

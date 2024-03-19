@@ -1,0 +1,86 @@
+/* 연결 자료구조*/
+ 
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct NODE{
+int data;
+struct NODE* link;
+}node;
+
+typedef struct{
+  node* rear;
+  node* front;
+}linkQ;
+
+linkQ* create();
+linkQ* enQueue(linkQ* q, int _data);
+linkQ* deQueue(linkQ* q);
+void printQ(linkQ* q);
+
+void main()
+{
+   linkQ* newqu = create();
+   enQueue(newqu,10);
+   enQueue(newqu,20);
+   deQueue(newqu);
+   printQ(newqu);
+ //printf("%d\n",newqu->front->data);
+   free(newqu);
+}
+
+linkQ* create()
+{
+   linkQ* newa = (linkQ*)malloc(sizeof(linkQ));
+   newa->rear=NULL;
+   newa->front=NULL;
+   return newa;
+}
+
+linkQ* enQueue(linkQ* q,int _data)
+{
+  node* newnode = (node*)malloc(sizeof(node));
+  if(newnode !=NULL){
+    newnode->data=_data;
+    newnode->link=NULL;
+    }
+   if(q->rear==NULL)
+    {
+    q->front = newnode;
+  }
+   else{
+     q->rear->link = newnode;
+   }
+   q->rear = newnode;
+
+   return q;
+}
+
+linkQ* deQueue(linkQ* q)
+{
+node* newnode = (node*)malloc(sizeof(node));
+if(q->front == NULL)
+{
+    printf("데이터가 없습니다");
+    return q;
+}
+else
+{
+node* temp = q->front;
+q->front = q->front->link;
+ free(temp);
+}
+  return q;
+}
+void printQ(linkQ* q)
+{
+if (q->front == NULL)
+{
+printf("큐가 비어있습니다");
+return;
+}
+while(q->front !=NULL)
+   {   printf("%d\n",q->front->data);  }
+}
+
+

@@ -1,0 +1,98 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct NODE{
+  int data;
+  struct NODE* next;
+} node;
+
+typedef struct {
+  node *head;
+} headNode;
+
+headNode* createHeadNode(){
+  headNode* newhead = (headNode*)malloc(sizeof(headNode));
+  newhead->head = (node*)malloc(sizeof(node));
+  newhead->head->next=NULL;
+  return newhead;
+}
+
+void pre_addNode(node* pnode, int _data)  //전위 [>
+{
+  node* newNode = (node*)malloc(sizeof(node));
+  if(newNode != NULL){
+    newNode ->data = _data;
+    newNode->next = pnode->next;
+    pnode->next=newNode;
+  }
+}
+
+void rear_addNode(node* pnode,int _data)  //후위 [>
+{
+  node* newNode = (node*)malloc(sizeof(node));
+  if(newNode != NULL){
+    newNode -> data = _data;
+    newNode -> next = NULL;
+
+    if(pnode->next == NULL)
+    {
+      pnode->next = newNode;
+      return;
+    }
+    node* current = pnode -> next;
+    while(current->next !=NULL)
+    {
+      current = current->next;
+    }
+
+    current->next = newNode;
+  }
+}
+
+void showNode(node* pnode) //노드 출력
+{
+  while(pnode->next != NULL)
+  {
+    printf("%d\n", pnode->next->data);
+    pnode=pnode->next;
+  }
+}
+
+//데이터 검색
+node* searchNode(node* pnode, int _data){
+  while(pnode!=NULL)
+  {
+    if(pnode->data==_data)
+    {
+      printf("%d 존재 합니다\n",pnode->data);
+    }
+    pnode = pnode->next;
+  }
+}
+
+void deleteNode(node* pnode) // 메모리삭제
+{
+  node* a = pnode->next;
+  node* b;
+  while (a != NULL)
+  {
+    b=a->next;
+    free(a);
+    a = b;
+  }
+  free(pnode);
+  printf("메모리삭제\n");
+}
+
+void main()
+{
+  headNode* newhead = createHeadNode();
+  //node* head=(node*)malloc(sizeof(node));
+  //head->next = NULL;
+  pre_addNode(newhead->head,10);
+  pre_addNode(newhead->head,20);
+  rear_addNode(newhead->head,30);
+  searchNode(newhead->head,10);
+  showNode(newhead->head);
+  deleteNode(newhead->head);
+}
